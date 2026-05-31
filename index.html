@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DeckMates Rummy — Play Together, Anywhere</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-dim: rgba(201,168,76,0.15);
+  --black: #0a0a0a;
+  --black2: #111111;
+  --black3: #1a1a1a;
+  --text: #f0e8d8;
+  --text-dim: rgba(240,232,216,0.55);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'Crimson Pro',Georgia,serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.12);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:14px;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 24px 40px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);}
+.suits-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:400px;opacity:0.025;color:var(--gold);pointer-events:none;letter-spacing:-20px;}
+.app-icon{width:110px;height:110px;border-radius:24px;background:var(--black2);border:2px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 32px;box-shadow:0 0 40px rgba(201,168,76,0.2);}
+.app-icon .spade{font-size:42px;color:var(--gold);line-height:1;}
+.app-icon .divider{width:60px;height:1px;background:rgba(201,168,76,0.4);margin:6px 0;}
+.app-icon .icon-name{font-family:'Playfair Display',serif;font-size:7px;letter-spacing:2px;color:var(--gold);}
+.app-icon .icon-sub{font-size:5px;letter-spacing:3px;color:rgba(201,168,76,0.6);text-transform:uppercase;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,80px);font-weight:900;color:var(--gold);line-height:1.05;letter-spacing:-1px;margin-bottom:16px;}
+.hero .tagline{font-size:clamp(16px,2.5vw,22px);color:var(--text-dim);font-style:italic;margin-bottom:40px;letter-spacing:0.5px;}
+.suits-row{display:flex;gap:16px;justify-content:center;margin-bottom:48px;font-size:22px;color:var(--gold);}
+.btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#000000;padding:14px 32px;border-radius:8px;text-decoration:none;font-family:'Playfair Display',serif;font-size:15px;font-weight:900;letter-spacing:1px;transition:all 0.2s;border:none;cursor:pointer;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+.btn-secondary{background:transparent;color:var(--gold);padding:14px 32px;border-radius:8px;text-decoration:none;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;letter-spacing:1px;border:1px solid var(--gold);transition:all 0.2s;}
+.btn-secondary:hover{background:var(--gold-dim);}
+
+/* FEATURES */
+.features{padding:100px 24px;max-width:1100px;margin:0 auto;}
+.section-label{text-align:center;font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.section-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--text);margin-bottom:64px;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+.feature-card{background:var(--black2);border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:32px;transition:border-color 0.2s;}
+.feature-card:hover{border-color:rgba(201,168,76,0.4);}
+.feature-icon{font-size:32px;margin-bottom:16px;}
+.feature-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:10px;}
+.feature-card p{font-size:15px;color:var(--text-dim);line-height:1.6;}
+
+/* DIVIDER */
+.gold-divider{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 24px;}
+.gold-divider::before,.gold-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.2);}
+.gold-divider span{color:var(--gold);font-size:18px;}
+
+/* GAME MODES */
+.modes{padding:100px 24px;background:var(--black2);}
+.modes-inner{max-width:1100px;margin:0 auto;}
+.modes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:64px;}
+.mode-card{border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:28px 24px;text-align:center;transition:all 0.2s;position:relative;overflow:hidden;}
+.mode-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.06),transparent 70%);}
+.mode-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.mode-card .mode-icon{font-size:36px;margin-bottom:12px;}
+.mode-card h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:8px;}
+.mode-card p{font-size:14px;color:var(--text-dim);line-height:1.5;}
+.coming-soon{font-size:10px;letter-spacing:2px;color:var(--gold);opacity:0.5;text-transform:uppercase;margin-top:8px;}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(201,168,76,0.1);padding:48px 24px;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);letter-spacing:1px;}
+.footer-links{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{color:var(--text-dim);text-decoration:none;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-size:12px;color:rgba(240,232,216,0.25);text-align:center;}
+
+/* PAGES */
+.page{display:none;padding:120px 24px 80px;max-width:800px;margin:0 auto;}
+.page.active{display:block;}
+.page h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);color:var(--gold);margin-bottom:12px;}
+.page .updated{font-size:13px;color:var(--text-dim);margin-bottom:40px;font-style:italic;}
+.page h2{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin:32px 0 12px;}
+.page p{font-size:16px;color:var(--text-dim);line-height:1.8;margin-bottom:16px;}
+.page ul{padding-left:20px;margin-bottom:16px;}
+.page ul li{font-size:16px;color:var(--text-dim);line-height:1.8;margin-bottom:6px;}
+.page a{color:var(--gold);}
+
+#home{display:block;}
+
+@media(max-width:600px){
+  nav{padding:14px 20px;}
+  .nav-links{gap:16px;}
+  .nav-links a{font-size:12px;}
+  .hero{padding:90px 20px 50px;}
+  .suits-bg{font-size:200px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">♠ DeckMates Rummy</div>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('privacy')">Privacy</a>
+    <a href="#" onclick="showPage('support')">Support</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+<section class="hero">
+  <div class="suits-bg">♠</div>
+  <div class="app-icon">
+    <div class="spade">♠</div>
+    <div class="divider"></div>
+    <div class="icon-name">DECKMATES</div>
+    <div class="icon-sub">RUMMY</div>
+  </div>
+  <h1>DeckMates Rummy</h1>
+  <div class="suits-row">♠ ♥ ♦ ♣</div>
+  <p class="tagline">Play Together, Anywhere</p>
+  <div class="btn-group">
+    <a href="#" class="btn-primary" style="color:#000000;font-weight:900;background:#C9A84C;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;letter-spacing:1px;display:inline-block;">Download on App Store</a>
+    <a href="#" class="btn-secondary">Get on Google Play</a>
+  </div>
+</section>
+
+<section class="features">
+  <p class="section-label">Why DeckMates</p>
+  <h2 class="section-title">Everything you love about Rummy</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>Practice vs Bot</h3>
+      <p>Sharpen your skills anytime with our intelligent bot. Perfect for beginners and seasoned players alike.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>Private Rooms</h3>
+      <p>Create a room, share a 6-digit code, and play with friends and family anywhere in the world.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>Public Match</h3>
+      <p>Jump into a live game with players worldwide. Compete, win chips, and climb the leaderboard.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Score Tracker</h3>
+      <p>Track in-person games with ease. Keep score, settle up, and review your game history.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Player Stats</h3>
+      <p>Follow your progress with detailed stats — wins, losses, and your best performances.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📖</div>
+      <h3>Learn to Play</h3>
+      <p>New to Rummy? Our in-game tutorial and How to Play guide get you started in minutes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"><span>♦</span></div>
+
+<section class="modes">
+  <div class="modes-inner">
+    <p class="section-label">Game Modes</p>
+    <h2 class="section-title">Play your way</h2>
+    <div class="modes-grid">
+      <div class="mode-card">
+        <div class="mode-icon">⚡</div>
+        <h3>Points Rummy</h3>
+        <p>Fast-paced. First to declare wins. Classic Indian Rummy at its best.</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">🎯</div>
+        <h3>Pool Rummy</h3>
+        <p>101 or 201 pool. Survive the eliminations and be the last one standing.</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">🃏</div>
+        <h3>Deals Rummy</h3>
+        <p>Fixed number of deals. Highest chips at the end wins.</p>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon">🔒</div>
+        <h3>Paplu Rummy</h3>
+        <p>A beloved variant coming soon to DeckMates.</p>
+        <p class="coming-soon">Coming Soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">♠ DeckMates Rummy</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="#" onclick="showPage('support')">Support</a>
+    </div>
+    <p class="footer-copy">© 2026 DeckMates Rummy. All rights reserved.</p>
+  </div>
+</footer>
+
+</div>
+
+<!-- PRIVACY POLICY PAGE -->
+<div id="privacy" class="page">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: May 2026</p>
+
+  <p>DeckMates Rummy ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
+
+  <h2>Information We Collect</h2>
+  <p>We collect the following types of information:</p>
+  <ul>
+    <li><strong>Account information</strong> — name and email address when you sign in with Google or Apple.</li>
+    <li><strong>Game data</strong> — game history, scores, wins, losses, and chip balance stored securely in Firebase.</li>
+    <li><strong>Device information</strong> — device type and operating system for app performance optimization.</li>
+    <li><strong>Anonymous usage data</strong> — app usage patterns via Google Analytics to improve the experience.</li>
+  </ul>
+
+  <h2>How We Use Your Information</h2>
+  <ul>
+    <li>To provide and improve the DeckMates Rummy app experience</li>
+    <li>To save your game progress and statistics</li>
+    <li>To enable multiplayer features like Private Rooms</li>
+    <li>To display relevant advertisements via Google AdMob</li>
+    <li>To respond to support requests</li>
+  </ul>
+
+  <h2>Advertising</h2>
+  <p>DeckMates Rummy uses Google AdMob to display advertisements. AdMob may collect and use data to show personalized ads. You can opt out of personalized ads in your device settings. For more information, visit <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</p>
+
+  <h2>Data Storage</h2>
+  <p>Your data is stored securely using Google Firebase. We do not sell your personal information to third parties.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>DeckMates Rummy is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+  <h2>Your Rights</h2>
+  <p>You may request deletion of your account and associated data at any time by contacting us at support@deckmatesrummy.com.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the date at the top of this page.</p>
+
+  <h2>Contact Us</h2>
+  <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a>.</p>
+
+  <br/>
+  <a href="#" onclick="showPage('home')" style="color:var(--gold);font-size:14px;letter-spacing:1px;">← Back to Home</a>
+</div>
+
+<!-- SUPPORT PAGE -->
+<div id="support" class="page">
+  <h1>Support</h1>
+  <p class="updated">We're here to help</p>
+
+  <h2>Contact Us</h2>
+  <p>For any questions, bug reports, or feedback, please email us at:</p>
+  <p><a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a></p>
+  <p>We typically respond within 24-48 hours.</p>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <h2>How do I create a Private Room?</h2>
+  <p>Tap "Private Room" on the home screen, select your game settings, and tap "Create". Share the 6-digit code with your friends so they can join.</p>
+
+  <h2>How do I join a Private Room?</h2>
+  <p>Tap "Private Room" on the home screen, enter the 6-digit code shared by the host, and tap "Join".</p>
+
+  <h2>What is a Wild Card?</h2>
+  <p>At the start of each round a random card is selected as the Wild Card. Cards of that rank from any suit act as wild cards and can substitute for any card in a sequence or set.</p>
+
+  <h2>How do I declare?</h2>
+  <p>Arrange your 13 cards into valid groups — at least one pure sequence (no wild cards) is required. Tap "Declare" and arrange your cards into groups to confirm your winning hand.</p>
+
+  <h2>What is a pure sequence?</h2>
+  <p>A pure sequence is 3 or more consecutive cards of the same suit with no wild cards. Every valid declaration must contain at least one pure sequence.</p>
+
+  <h2>How do I delete my account?</h2>
+  <p>To request account deletion and removal of all associated data, please email us at <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a> with the subject line "Account Deletion Request".</p>
+
+  <h2>Report a Bug</h2>
+  <p>Found a bug? Please email <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a> with a description of the issue, your device model, and iOS version. Screenshots are always helpful!</p>
+
+  <br/>
+  <a href="#" onclick="showPage('home')" style="color:var(--gold);font-size:14px;letter-spacing:1px;">← Back to Home</a>
+</div>
+
+<script>
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
