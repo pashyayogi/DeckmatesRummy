@@ -109,9 +109,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,0.1);padding
 <nav>
   <div class="nav-logo">♠ DeckMates Rummy</div>
   <div class="nav-links">
-    <a href="#" onclick="showPage('home')">Home</a>
-    <a href="#" onclick="showPage('privacy')">Privacy</a>
-    <a href="#" onclick="showPage('support')">Support</a>
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
   </div>
 </nav>
 
@@ -208,9 +208,9 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,0.1);padding
   <div class="footer-inner">
     <div class="footer-logo">♠ DeckMates Rummy</div>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home')">Home</a>
-      <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
-      <a href="#" onclick="showPage('support')">Support</a>
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="support.html">Support</a>
     </div>
     <p class="footer-copy">© 2026 DeckMates Rummy. All rights reserved.</p>
   </div>
@@ -218,96 +218,5 @@ footer{background:var(--black);border-top:1px solid rgba(201,168,76,0.1);padding
 
 </div>
 
-<!-- PRIVACY POLICY PAGE -->
-<div id="privacy" class="page">
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: May 2026</p>
-
-  <p>DeckMates Rummy ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
-
-  <h2>Information We Collect</h2>
-  <p>We collect the following types of information:</p>
-  <ul>
-    <li><strong>Account information</strong> — name and email address when you sign in with Google or Apple.</li>
-    <li><strong>Game data</strong> — game history, scores, wins, losses, and chip balance stored securely in Firebase.</li>
-    <li><strong>Device information</strong> — device type and operating system for app performance optimization.</li>
-    <li><strong>Anonymous usage data</strong> — app usage patterns via Google Analytics to improve the experience.</li>
-  </ul>
-
-  <h2>How We Use Your Information</h2>
-  <ul>
-    <li>To provide and improve the DeckMates Rummy app experience</li>
-    <li>To save your game progress and statistics</li>
-    <li>To enable multiplayer features like Private Rooms</li>
-    <li>To display relevant advertisements via Google AdMob</li>
-    <li>To respond to support requests</li>
-  </ul>
-
-  <h2>Advertising</h2>
-  <p>DeckMates Rummy uses Google AdMob to display advertisements. AdMob may collect and use data to show personalized ads. You can opt out of personalized ads in your device settings. For more information, visit <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</p>
-
-  <h2>Data Storage</h2>
-  <p>Your data is stored securely using Google Firebase. We do not sell your personal information to third parties.</p>
-
-  <h2>Children's Privacy</h2>
-  <p>DeckMates Rummy is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
-
-  <h2>Your Rights</h2>
-  <p>You may request deletion of your account and associated data at any time by contacting us at support@deckmatesrummy.com.</p>
-
-  <h2>Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the date at the top of this page.</p>
-
-  <h2>Contact Us</h2>
-  <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a>.</p>
-
-  <br/>
-  <a href="#" onclick="showPage('home')" style="color:var(--gold);font-size:14px;letter-spacing:1px;">← Back to Home</a>
-</div>
-
-<!-- SUPPORT PAGE -->
-<div id="support" class="page">
-  <h1>Support</h1>
-  <p class="updated">We're here to help</p>
-
-  <h2>Contact Us</h2>
-  <p>For any questions, bug reports, or feedback, please email us at:</p>
-  <p><a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a></p>
-  <p>We typically respond within 24-48 hours.</p>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <h2>How do I create a Private Room?</h2>
-  <p>Tap "Private Room" on the home screen, select your game settings, and tap "Create". Share the 6-digit code with your friends so they can join.</p>
-
-  <h2>How do I join a Private Room?</h2>
-  <p>Tap "Private Room" on the home screen, enter the 6-digit code shared by the host, and tap "Join".</p>
-
-  <h2>What is a Wild Card?</h2>
-  <p>At the start of each round a random card is selected as the Wild Card. Cards of that rank from any suit act as wild cards and can substitute for any card in a sequence or set.</p>
-
-  <h2>How do I declare?</h2>
-  <p>Arrange your 13 cards into valid groups — at least one pure sequence (no wild cards) is required. Tap "Declare" and arrange your cards into groups to confirm your winning hand.</p>
-
-  <h2>What is a pure sequence?</h2>
-  <p>A pure sequence is 3 or more consecutive cards of the same suit with no wild cards. Every valid declaration must contain at least one pure sequence.</p>
-
-  <h2>How do I delete my account?</h2>
-  <p>To request account deletion and removal of all associated data, please email us at <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a> with the subject line "Account Deletion Request".</p>
-
-  <h2>Report a Bug</h2>
-  <p>Found a bug? Please email <a href="mailto:support@deckmatesrummy.com">support@deckmatesrummy.com</a> with a description of the issue, your device model, and iOS version. Screenshots are always helpful!</p>
-
-  <br/>
-  <a href="#" onclick="showPage('home')" style="color:var(--gold);font-size:14px;letter-spacing:1px;">← Back to Home</a>
-</div>
-
-<script>
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
-  window.scrollTo(0,0);
-}
-</script>
 </body>
 </html>
